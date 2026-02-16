@@ -1,0 +1,6 @@
+🎵 Starting 'Genius' Audio Conversion (HE-AAC v2)...
+---------------------------------------------------
+ℹ️  Using 'AAC-LC' encoder (Universal Compatibility)
+   Settings: 64kbps Mono (Excellent for speech, tiny size)
+./scripts/convert_audio.sh: line 25: syntax error near unexpected token `fi'
+./scripts/convert_audio.sh: line 25: `fi'

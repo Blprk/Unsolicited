@@ -137,12 +137,19 @@ document.addEventListener('DOMContentLoaded', () => {
       mainAudio.src = src;
       playingTitle.textContent = title;
       playingDesc.textContent = description;
-      mainAudio.load();
+      // mainAudio.load(); // REDUNDANT: Setting src already triggers load
       updateHero(title, description);
     }
     bottomPlayer.classList.remove('hidden');
     document.body.classList.add('player-active');
-    if (shouldPlay) mainAudio.play();
+
+    // Trigger play immediately to kick off buffering
+    if (shouldPlay) {
+      const playPromise = mainAudio.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(error => console.log("Playback interrupted or blocked:", error));
+      }
+    }
 
     podcastCards.forEach(card => {
       if (card.getAttribute('data-src').includes(src)) {

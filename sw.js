@@ -1,5 +1,5 @@
-const CACHE_NAME = 'unsolicited-cache-v10';
-const AUDIO_CACHE_NAME = 'unsolicited-audio-cache-v10';
+const CACHE_NAME = 'unsolicited-cache-v11';
+const AUDIO_CACHE_NAME = 'unsolicited-audio-cache-v11';
 
 // App Shell Assets
 const ASSETS_TO_CACHE = [
@@ -71,20 +71,22 @@ self.addEventListener('fetch', (event) => {
 
     // Handle Audio Requests (Range Support)
     if (url.pathname.endsWith('.m4a')) {
-        event.respondWith(
-            caches.open(AUDIO_CACHE_NAME).then(async (cache) => {
-                const cachedResponse = await cache.match(event.request);
+        const range = event.request.headers.get('Range');
 
-                // If we have the start cached and the request is for the start...
-                // (Simplified: Serve cached start, let browser handle range stitching for rest)
-                if (cachedResponse) {
-                    return cachedResponse;
-                }
-
-                // Fallback to network
-                return fetch(event.request);
-            })
-        );
+        // Optimization: Only intercept if we are requesting the START (bytes 0-...)
+        // This prevents the "buffering hang" when seeking or continuing playback.
+        if (!range || range.startsWith('bytes=0-')) {
+            event.respondWith(
+                caches.open(AUDIO_CACHE_NAME).then(async (cache) => {
+                    const cachedResponse = await cache.match(event.request, { ignoreSearch: true });
+                    if (cachedResponse) return cachedResponse;
+                    return fetch(event.request);
+                })
+            );
+        } else {
+            // Passthrough directly to network for mid-file chunks
+            event.respondWith(fetch(event.request));
+        }
         return;
     }
 

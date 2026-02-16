@@ -8,12 +8,12 @@
     "theme_color": "#1E88E5",
     "icons": [
         {
-            "src": "https://cdn.glitch.global/2c215b5d-8c5f-422a-bf3a-3d6cd9e29958/android-chrome-192x192.png?v=1733479365755",
+            "src": "/assets/icons/logo.png",
             "sizes": "192x192",
             "type": "image/png"
         },
         {
-            "src": "https://cdn.glitch.global/2c215b5d-8c5f-422a-bf3a-3d6cd9e29958/android-chrome-512x512.png?v=1733479371651",
+            "src": "/assets/icons/logo.png",
             "sizes": "512x512",
             "type": "image/png"
         }

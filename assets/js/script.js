@@ -169,9 +169,16 @@ document.addEventListener('DOMContentLoaded', () => {
       const src = card.getAttribute('data-src');
       const title = card.getAttribute('data-title');
       const desc = card.getAttribute('data-description');
-      if (mainAudio.src.includes(src)) {
-        if (mainAudio.paused) mainAudio.play();
-        else mainAudio.pause();
+
+      const isCurrentSource = mainAudio.src.includes(src);
+      const isPlayerHidden = bottomPlayer.classList.contains('hidden');
+
+      if (isCurrentSource && !isPlayerHidden) {
+        if (mainAudio.paused) {
+          mainAudio.play();
+        } else {
+          mainAudio.pause();
+        }
       } else {
         updatePlayerUI(src, title, desc);
         window.scrollTo({ top: 0, behavior: 'smooth' });

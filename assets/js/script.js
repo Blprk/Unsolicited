@@ -75,6 +75,12 @@ document.addEventListener('DOMContentLoaded', () => {
       const newTheme = rootElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
       rootElement.setAttribute('data-theme', newTheme);
       localStorage.setItem('theme', newTheme);
+
+      // Update PWA theme-color meta
+      const metaThemeColor = document.getElementById('theme-color-meta');
+      if (metaThemeColor) {
+        metaThemeColor.setAttribute('content', newTheme === 'light' ? '#F4F7F6' : '#121212');
+      }
     });
   }
 
@@ -199,10 +205,12 @@ document.addEventListener('DOMContentLoaded', () => {
   mainAudio.onplay = () => {
     playPauseBtn.textContent = PAUSE_ICON;
     if (heroPlayBtn) heroPlayBtn.innerHTML = `<span class="icon">⏸</span> Pause`;
+    document.body.classList.add('player-engaged');
   };
   mainAudio.onpause = () => {
     playPauseBtn.textContent = PLAY_ICON;
     if (heroPlayBtn) heroPlayBtn.innerHTML = `<span class="icon">▶</span> Play`;
+    document.body.classList.remove('player-engaged');
   };
   progressBar.oninput = () => {
     const time = (progressBar.value / 100) * mainAudio.duration;

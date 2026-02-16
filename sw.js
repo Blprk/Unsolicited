@@ -1,5 +1,5 @@
-const CACHE_NAME = 'unsolicited-cache-v7';
-const AUDIO_CACHE_NAME = 'unsolicited-audio-cache-v7';
+const CACHE_NAME = 'unsolicited-cache-v9';
+const AUDIO_CACHE_NAME = 'unsolicited-audio-cache-v9';
 
 // App Shell Assets
 const ASSETS_TO_CACHE = [
@@ -7,7 +7,9 @@ const ASSETS_TO_CACHE = [
     '/index.html',
     '/assets/css/style.css',
     '/assets/js/script.js',
-    '/manifest.json'
+    '/manifest.json',
+    'https://cdn.glitch.global/2c215b5d-8c5f-422a-bf3a-3d6cd9e29958/android-chrome-192x192.png?v=1733479365755',
+    'https://cdn.glitch.global/2c215b5d-8c5f-422a-bf3a-3d6cd9e29958/android-chrome-512x512.png?v=1733479371651'
 ];
 
 // Install Event - Cache App Shell

@@ -1,5 +1,22 @@
 
 document.addEventListener('DOMContentLoaded', () => {
+  // --- Service Worker Registration ---
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js')
+      .then(registration => {
+        console.log('ServiceWorker registration successful');
+
+        // Trigger Pre-caching of Audio Starts
+        const audioUrls = Array.from(document.querySelectorAll('.podcast-card'))
+          .map(card => card.getAttribute('data-src'));
+
+        if (registration.active) {
+          registration.active.postMessage({ type: 'PRECACHE_AUDIO', urls: audioUrls });
+        }
+      })
+      .catch(err => console.log('ServiceWorker registration failed: ', err));
+  }
+
   // SVG Icons
   const PLAY_ICON = `▶`;
   const PAUSE_ICON = `⏸`;
@@ -62,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // --- Jump to Top Logic ---
-  window.onscroll = function() {
+  window.onscroll = function () {
     if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
       if (jumpToTopBtn) jumpToTopBtn.style.display = "flex";
     } else {
@@ -85,10 +102,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const fetchAlbumArt = (title) => {
     if (!heroArt) return;
     heroArt.classList.add('hidden');
-    
+
     const imageId = PODCAST_IMAGES[title] || DEFAULT_IMAGE_ID;
     const src = `https://images.unsplash.com/photo-${imageId}?auto=format&fit=crop&w=600&h=600&q=80`;
-    
+
     // Preload image
     const tempImg = new Image();
     tempImg.src = src;
@@ -197,7 +214,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const podcastParam = urlParams.get('podcast');
   let startCard = podcastCards[0];
   if (podcastParam) {
-    const matchingCard = Array.from(podcastCards).find(card => 
+    const matchingCard = Array.from(podcastCards).find(card =>
       card.getAttribute('data-title').toLowerCase().replace(/[^a-z0-9]+/g, '-') === podcastParam
     );
     if (matchingCard) startCard = matchingCard;

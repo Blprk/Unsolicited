@@ -1,0 +1,13 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# Project files
+.glitch-assets
+.glitchdotcom.json
+.data/
+.bash_history
+
+# Temp scripts (Cleanup)
+*.py
+*.sh

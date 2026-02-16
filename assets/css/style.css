@@ -120,9 +120,27 @@ p {
 
 /* Update Toggle Position to not clash with nav if needed, but it fits in most designs */
 .toggle-container {
-  top: 1rem;
-  right: 6rem; /* Shifted left to leave room for branding/menu if added, or just aligned with nav height */
   position: fixed;
+  top: 1.5rem;
+  right: 2rem;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: var(--card-bg);
+  background-image: var(--toggle-icon);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 24px;
+  cursor: pointer;
+  z-index: 2000;
+  box-shadow: var(--shadow-subtle);
+  border: 1px solid var(--card-border);
+  transition: all 0.3s ease;
+}
+
+.toggle-container:hover {
+  transform: rotate(15deg) scale(1.1);
+  box-shadow: var(--shadow-elevated);
 }
 
 /* Hero Section */

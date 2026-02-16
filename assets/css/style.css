@@ -618,6 +618,14 @@ body.player-active .footer {
     align-items: center;
   }
 
+  .featured-full-description {
+    font-size: 0.8rem;
+    /* Shrinking featured desc on mobile */
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
   .hero-play-button {
     width: 100%;
     /* Full width for easier tapping */

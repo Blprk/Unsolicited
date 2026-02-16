@@ -1,5 +1,5 @@
-const CACHE_NAME = 'unsolicited-cache-v13';
-const AUDIO_CACHE_NAME = 'unsolicited-audio-cache-v13';
+const CACHE_NAME = 'unsolicited-cache-v14';
+const AUDIO_CACHE_NAME = 'unsolicited-audio-cache-v14';
 
 // App Shell Assets
 const ASSETS_TO_CACHE = [

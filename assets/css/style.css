@@ -193,6 +193,11 @@ p {
   align-items: center;
   gap: clamp(2rem, 5vw, 5rem);
   background: var(--card-bg);
+  background: radial-gradient(at 0% 0%, hsla(210, 100%, 50%, 0.05) 0, transparent 50%),
+    radial-gradient(at 100% 100%, hsla(180, 100%, 50%, 0.05) 0, transparent 50%),
+    var(--card-bg);
+  background-size: 200% 200%;
+  animation: gradientWave 15s ease infinite;
   border: 1px solid var(--card-border);
   border-radius: 40px;
   padding: clamp(1.5rem, 3vw, 3rem);
@@ -260,6 +265,29 @@ p {
   100% {
     transform: translateX(100%);
   }
+}
+
+@keyframes gradientWave {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+body.player-engaged .featured-focus {
+  animation: gradientWave 6s ease infinite;
+  /* Speed up on interaction */
+  background: radial-gradient(at 0% 0%, hsla(210, 100%, 50%, 0.15) 0, transparent 50%),
+    radial-gradient(at 100% 100%, hsla(180, 100%, 50%, 0.15) 0, transparent 50%),
+    var(--card-bg);
+  background-size: 200% 200%;
 }
 
 .featured-art img {
